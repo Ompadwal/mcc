@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Portal</title>
+    <style>
+        Body {
+            Font-family: Arial, sans-serif;
+            Background: linear-gradient(135deg, #74ebd5, #9face6);
+            Display: flex;
+            Justify-content: center;
+            Align-items: center;
+            Height: 100vh;
+            Margin: 0;
+        }
+
+        .login-container {
+            Background: #fff;
+            Border-radius: 10px;
+            Padding: 20px 30px;
+            Box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            Text-align: center;
+            Width: 400px;
+        }
+
+        .login-container h1 {
+            Font-size: 24px;
+            Margin-bottom: 20px;
+            Color: #333;
+        }
+
+        .profile-photo {
+            Width: 100px;
+            Height: 100px;
+            Border-radius: 50%;
+            Margin: 0 auto 10px;
+            Overflow: hidden;
+            Box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            Background: url('images/profile.jpg') no-repeat center center/cover;
+        }
+
+        .admin-name {
+            Font-size: 16px;
+            Font-weight: bold;
+            Margin-bottom: 20px;
+            Color: #555;
+        }
+
+        .input-group {
+            Margin-bottom: 15px;
+        }
+
+        .input-group input {
+            Width: 100%;
+            Padding: 10px;
+            Font-size: 14px;
+            Border: 1px solid #ccc;
+            Border-radius: 5px;
+        }
+
+        .input-group .error {
+            Color: red;
+            Font-size: 12px;
+            Margin-top: 5px;
+            Display: none;
+        }
+
+        .checkbox-group {
+            Text-align: left;
+            Margin-top: -10px;
+            Margin-bottom: 15px;
+            Font-size: 14px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            Margin-right: 5px;
+        }
+
+        .login-btn {
+            Background: #74ebd5;
+            Color: white;
+            Border: none;
+            Padding: 10px 20px;
+            Font-size: 16px;
+            Border-radius: 5px;
+            Cursor: pointer;
+            Transition: background 0.3s ease;
+        }
+
+        .login-btn:hover {
+            Background: #57c9a7;
+        }
+
+        @media (max-width: 500px) {
+            .login-container {
+                Width: 90%;
+                Padding: 20px;
+            }
+
+            .admin-photo {
+                Width: 80px;
+                Height: 80px;
+            }
+
+            .login-btn {
+                Font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login Portal</h1>
+        <div class="profile-photo"></div>
+        <div class="admin-name">ADMIN</div>
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Enter Your Name" required>
+            <div class="error" id="username-error">Username is required.</div>
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Enter Your Password" required>
+            <div class="error" id="password-error">Password is required.</div>
+        </div>
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" id="show-password" onclick="togglePassword()"> Show Password
+            </label>
+        </div>
+        <button class="login-btn" onclick="validateLogin()">Login</button>
+    </div>
+
+    <script>
+        const correctUsername = "admin";
+        const correctPassword = "admin@12345";
+
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const checkbox = document.getElementById('show-password');
+            passwordField.type = checkbox.checked ? 'text' : 'password';
+        }
+
+        function validateLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');
+
+            // Reset error messages
+            usernameError.style.display = 'none';
+            passwordError.style.display = 'none';
+
+            if (!username) {
+                usernameError.style.display = 'block';
+            }
+
+            if (!password) {
+                passwordError.style.display = 'block';
+            }
+
+            if (username && password) {
+                if (username === correctUsername && password === correctPassword) {
+                    window.location.href = "LoginDashboard.html";
+                } else {
+                    alert("Invalid Username or Password!");
+                    window.location.reload();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Documents</title>
+    <style>
+{
+            Margin: 0;
+            Padding: 0;
+            Box-sizing: border-box;
+        }
+
+        Body {
+            Font-family: Arial, sans-serif;
+            Display: flex;
+            Height: 100vh;
+            Background: linear-gradient(135deg, #74ebd5, #9face6);
+        }
+
+        .sidebar {
+            Width: 25%;
+            Background: #2d2d2d;
+            Color: #fff;
+            Display: flex;
+            Flex-direction: column;
+            Align-items: center;
+            Padding: 20px;
+        }
+
+        .sidebar h2 {
+            Margin-bottom: 20px;
+            Font-size: 20px;
+            Text-transform: uppercase;
+            Border-bottom: 2px solid #555;
+            Padding-bottom: 10px;
+            Width: 100%;
+            Text-align: center;
+        }
+
+        .profile-photo {
+            Width: 120px;
+            Height: 120px;
+            Border-radius: 50%;
+            Background: url('images/profile.jpg') no-repeat center center/cover;
+            Margin-bottom: 20px;
+            Border: 4px solid #555;
+        }
+
+        .menu {
+            Width: 100%;
+        }
+
+        .menu button {
+            Width: 100%;
+            Background: #444;
+            Color: #fff;
+            Border: none;
+            Padding: 15px;
+            Font-size: 16px;
+            Margin: 5px 0;
+            Cursor: pointer;
+            Text-align: left;
+            Transition: all 0.3s ease;
+            Border-radius: 5px;
+        }
+
+        .menu button:hover {
+            Background: #555;
+        }
+
+        .main-content {
+            Flex: 1;
+            Background: #f9f9f9;
+            Display: flex;
+            Flex-direction: column;
+            Align-items: center;
+            Padding: 20px;
+        }
+
+        .top-bar {
+            Width: 96%;
+            Background: #444;
+            Color: #fff;
+            Padding: 25px;
+            Text-align: center;
+            Border-radius: 5px;
+            Margin-bottom: 20px;
+        }
+
+        .content-box {
+            Width: 70%;
+            Background: #fff;
+            Border-radius: 10px;
+            Padding: 20px;
+            Box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            Text-align: center;
+        }
+
+        .form-group {
+            Margin-bottom: 20px;
+        }
+
+        .form-group label {
+            Display: block;
+            Font-size: 16px;
+            Margin-bottom: 10px;
+            Text-align: left;
+        }
+
+        .form-group select {
+            Width: 100%;
+            Padding: 10px;
+            Font-size: 16px;
+            Border-radius: 5px;
+            Border: 1px solid #ccc;
+        }
+
+        .form-actions {
+            Display: flex;
+            Justify-content: center;
+            gap: 40px;
+            Margin-top: 20px;
+        }
+
+        .form-actions button {
+            Padding: 10px 20px;
+            Font-size: 16px;
+            Border: none;
+            Border-radius: 5px;
+            Cursor: pointer;
+            Transition: all 0.3s ease;
+        }
+
+        .form-actions .delete-btn {
+            Background: #e74c3c;
+            Color: #fff;
+        }
+
+        .form-actions .delete-btn:hover {
+            Background: #c0392b;
+        }
+
+        .form-actions .go-back-btn {
+            Background: #34495e;
+            Color: #fff;
+        }
+
+        .form-actions .go-back-btn:hover {
+            Background: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            Body {
+                Flex-direction: column;
+            }
+
+            .sidebar {
+                Width: 100%;
+                Height: auto;
+            }
+
+            .main-content {
+                Width: 100%;
+            }
+
+            .content-box {
+                Width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <div class="profile-photo"></div>
+        <div class="menu">
+            <button onclick="location.href='ManageProfile.html'">Manage Profile</button>
+            <button onclick="location.href='ManageDocuments.html'">Manage Documents</button>
+            <button onclick="location.href='ManageCommittees.html'">Manage Committees</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            DELETE DOCUMENTS
+        </div>
+        <div class="content-box">
+            <div class="form-group">
+                <label for="committee">Select Committee</label>
+                <select id="committee" onchange="loadFiles()">
+                    <option value="">Select Committee</option>
+                    <option value="COMMITTEE1">COMMITTEE1</option>
+                    <option value="COMMITTEE2">COMMITTEE2</option>
+                    <option value="COMMITTEE3">COMMITTEE3</option>
+                    <option value="COMMITTEE4">COMMITTEE4</option>
+                    <option value="COMMITTEE5">COMMITTEE5</option>
+                    <option value="COMMITTEE6">COMMITTEE6</option>
+                    <option value="COMMITTEE7">COMMITTEE7</option>
+                    <option value="COMMITTEE8">COMMITTEE8</option>
+                    <option value="COMMITTEE9">COMMITTEE9</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="file">Select File</label>
+                <select id="file">
+                    <option value="">Select File</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button class="delete-btn" onclick="deleteFile()">DELETE</button>
+                <button class="go-back-btn" onclick="location.href='ManageDocuments.html'">GO BACK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const files = {
+            COMMITTEE1: [],
+            COMMITTEE2: ["report1.pdf", "report2.pdf"],
+            COMMITTEE3: [],
+            COMMITTEE4: [],
+            COMMITTEE5: ["report6.pdf"],
+            COMMITTEE6: [],
+            COMMITTEE7: [],
+            COMMITTEE8: [],
+            COMMITTEE9: []
+        };
+
+        function loadFiles() {
+            const committee = document.getElementById("committee").value;
+            const fileDropdown = document.getElementById("file");
+
+            fileDropdown.innerHTML = "<option value='>Select File</option>";
+
+            if (committee && files[committee]) {
+                files[committee].forEach(file => {
+                    const option = document.createElement("option");
+                    option.value = file;
+                    option.textContent = file;
+                    fileDropdown.appendChild(option);
+                });
+            }
+        }
+
+        function deleteFile() {
+            const committee = document.getElementById("committee").value;
+            const file = document.getElementById("file").value;
+
+            if (!committee || !file) {
+                alert("Please select both a committee and a file.");
+                return;
+            }
+
+            const index = files[committee].indexOf(file);
+            if (index > -1) {
+                files[committee].splice(index, 1);
+                loadFiles();
+                alert("DOCUMENT DELETED SUCCESSFULLY");
+            }
+        }
+    </script>
+</body>
+</html>

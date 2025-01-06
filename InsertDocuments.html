@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Documents</title>
+    <style>
+{
+            Margin: 0;
+            Padding: 0;
+            Box-sizing: border-box;
+        }
+
+        Body {
+            Font-family: Arial, sans-serif;
+            Display: flex;
+            Height: 100vh;
+            Background: linear-gradient(135deg, #74ebd5, #9face6);
+        }
+
+        .sidebar {
+            Width: 25%;
+            Background: #2d2d2d;
+            Color: #fff;
+            Display: flex;
+            Flex-direction: column;
+            Align-items: center;
+            Padding: 20px;
+        }
+
+        .sidebar h2 {
+            Margin-bottom: 20px;
+            Font-size: 20px;
+            Text-transform: uppercase;
+            Border-bottom: 2px solid #555;
+            Padding-bottom: 10px;
+            Width: 100%;
+            Text-align: center;
+        }
+
+        .profile-photo {
+            Width: 120px;
+            Height: 120px;
+            Border-radius: 50%;
+            Background: url('images/profile.jpg') no-repeat center center/cover;
+            Margin-bottom: 20px;
+            Border: 4px solid #555;
+        }
+
+        .menu {
+            Width: 100%;
+        }
+
+        .menu button {
+            Width: 100%;
+            Background: #444;
+            Color: #fff;
+            Border: none;
+            Padding: 15px;
+            Font-size: 16px;
+            Margin: 5px 0;
+            Cursor: pointer;
+            Text-align: left;
+            Transition: all 0.3s ease;
+            Border-radius: 5px;
+        }
+
+        .menu button:hover {
+            Background: #555;
+        }
+
+        .main-content {
+            Flex: 1;
+            Background: #f9f9f9;
+            Display: flex;
+            Flex-direction: column;
+            Align-items: center;
+            Padding: 0px;
+        }
+
+        .top-bar {
+            Width: 96%;
+            Background: #444;
+            Color: #fff;
+            Padding: 25px;
+            Text-align: center;
+            Border-radius: 5px;
+            Margin-bottom: 20px;
+        }
+
+        .form-container {
+            Background: #fff;
+            Width: 50%;
+            Padding: 20px;
+            Border-radius: 10px;
+            Box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            Margin-bottom: 20px;
+        }
+
+        .form-group label {
+            Display: block;
+            Margin-bottom: 10px;
+            Font-weight: bold;
+        }
+
+        .form-group select, .form-group input {
+            Width: 100%;
+            Padding: 10px;
+            Font-size: 14px;
+            Border: 1px solid #ccc;
+            Border-radius: 5px;
+        }
+
+        .form-group input[type="file"] {
+            Padding: 5px;
+        }
+
+        .error-message {
+            Color: red;
+            Font-size: 14px;
+            Margin-top: 5px;
+            Display: none; /* Hidden by default */
+        }
+
+        .form-buttons {
+            Display: flex;
+            Justify-content: space-between;
+        }
+
+        .form-buttons button {
+            Width: 45%;
+            Padding: 10px;
+            Font-size: 16px;
+            Border: none;
+            Border-radius: 5px;
+            Cursor: pointer;
+            Transition: all 0.3s ease;
+        }
+
+        .form-buttons .submit-btn {
+            Background: #28a745;
+            Color: #fff;
+        }
+
+        .form-buttons .submit-btn:hover {
+            Background: #218838;
+        }
+
+        .form-buttons .back-btn {
+            Background: #dc3545;
+            Color: #fff;
+        }
+
+        .form-buttons .back-btn:hover {
+            Background: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            Body {
+                Flex-direction: column;
+            }
+
+            .sidebar {
+                Width: 100%;
+                Height: auto;
+            }
+
+            .main-content {
+                Width: 100%;
+            }
+
+            .form-container {
+                Width: 90%;
+            }
+        }
+    </style>
+    <script>
+        // Handle form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            const fileInput = document.getElementById('file');
+            const errorMessage = document.getElementById('error-message');
+
+            if (!fileInput.value) {
+                errorMessage.style.display = 'block'; // Show error message
+            } else {
+                errorMessage.style.display = 'none'; // Hide error message
+                alert("DOCUMENT INSERTED SUCCESSFULLY");
+                location.reload(); // Reload the page
+            }
+        }
+
+        // Navigate back to the ManageDocuments.html page
+        function goBack() {
+            window.location.href = 'ManageDocuments.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <div class="profile-photo"></div>
+        <div class="menu">
+            <button onclick="location.href='ManageProfile.html'">Manage Profile</button>
+            <button onclick="location.href='ManageDocuments.html'">Manage Documents</button>
+            <button onclick="location.href='ManageCommittees.html'">Manage Committees</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            INSERT DOCUMENTS
+        </div>
+        <div class="form-container">
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="committee">Select Committee</label>
+                    <select id="committee" name="committee">
+                        <option value="COMMITTEE1">COMMITTEE1</option>
+                        <option value="COMMITTEE2">COMMITTEE2</option>
+                        <option value="COMMITTEE3">COMMITTEE3</option>
+                        <option value="COMMITTEE4">COMMITTEE4</option>
+                        <option value="COMMITTEE5">COMMITTEE5</option>
+                        <option value="COMMITTEE6">COMMITTEE6</option>
+                        <option value="COMMITTEE7">COMMITTEE7</option>
+                        <option value="COMMITTEE8">COMMITTEE8</option>
+                        <option value="COMMITTEE9">COMMITTEE9</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="file">Select File</label>
+                    <input type="file" id="file" name="file" />
+                    <span id="error-message" class="error-message">Please select a file.</span>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="submit-btn">Submit</button>
+                    <button type="button" class="back-btn" onclick="goBack()">Go Back</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html> 

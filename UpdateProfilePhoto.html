@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile Photo</title>
+    <style>
+{
+            Margin: 0;
+            Padding: 0;
+            Box-sizing: border-box;
+        }
+
+        Body {
+            Font-family: Arial, sans-serif;
+            Display: flex;
+            Height: 100vh;
+            Background: linear-gradient(135deg, #74ebd5, #9face6);
+        }
+
+        .sidebar {
+            Width: 25%;
+            Background: #2d2d2d;
+            Color: #fff;
+            Display: flex;
+            Flex-direction: column;
+            Align-items: center;
+            Padding: 20px;
+            Position: relative;
+        }
+
+        .sidebar h2 {
+            Margin-bottom: 20px;
+            Font-size: 20px;
+            Text-transform: uppercase;
+            Border-bottom: 2px solid #555;
+            Padding-bottom: 10px;
+            Width: 100%;
+            Text-align: center;
+        }
+
+        .profile-photo {
+            Width: 120px;
+            Height: 120px;
+            Border-radius: 50%;
+            Background: url('images/profile.jpg') no-repeat center center/cover;
+            Margin-bottom: 20px;
+            Border: 4px solid #555;
+        }
+
+        .menu {
+            Width: 100%;
+        }
+
+        .menu button {
+            Width: 100%;
+            Background: #444;
+            Color: #fff;
+            Border: none;
+            Padding: 15px;
+            Font-size: 16px;
+            Margin: 5px 0;
+            Cursor: pointer;
+            Text-align: left;
+            Transition: all 0.3s ease;
+            Border-radius: 5px;
+        }
+
+        .menu button:hover {
+            Background: #555;
+        }
+
+        .main-content {
+            Flex: 1;
+            Background: #f9f9f9;
+            Display: flex;
+            Flex-direction: column;
+            Justify-content: flex-start;
+            Align-items: center;
+            Padding: 0px;
+            Position: relative;
+        }
+
+        .top-bar {
+            Width: 96%;
+            Background: #444;
+            Color: #fff;
+            Padding: 25px;
+            Text-align: center;
+            Border-radius: 5px;
+            Margin-bottom: 20px;
+        }
+
+        .upload-container {
+            Background: #fff;
+            Padding: 30px;
+            Border: 1px solid #ccc;
+            Border-radius: 5px;
+            Box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            Width: 50%;
+            Text-align: center;
+        }
+
+        .upload-container input[type="file"] {
+            Margin-top: 20px;
+            Margin-bottom: 20px;
+        }
+
+        .upload-container button {
+            Padding: 10px 20px;
+            Margin: 5px;
+            Background-color: #444;
+            Color: #fff;
+            Border: none;
+            Border-radius: 5px;
+            Cursor: pointer;
+            Transition: all 0.3s ease;
+        }
+
+        .upload-container button:hover {
+            Background-color: #555;
+        }
+
+        @media (max-width: 768px) {
+            Body {
+                Flex-direction: column;
+            }
+
+            .sidebar {
+                Width: 100%;
+                Height: auto;
+            }
+
+            .main-content {
+                Width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <div class="profile-photo"></div>
+        <div class="menu">
+            <button onclick="location.href='ManageProfile.html'">Manage Profile</button>
+            <button onclick="location.href='ManageDocuments.html'">Manage Documents</button>
+            <button onclick="location.href='ManageCommittees.html'">Manage Committees</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            UPDATE PROFILE PHOTO
+        </div>
+        <div class="upload-container">
+            <h3>Upload Profile Photo</h3>
+            <form id="uploadForm">
+                <input type="file" id="fileInput" accept=".jpg, .jpeg, .png" required>
+                <br>
+                <button type="submit">Submit</button>
+                <button type="button" onclick="goBack()">Go Back</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Handle file validation and display a popup for invalid file types
+        document.getElementById('fileInput').addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const validExtensions = ['image/jpeg', 'image/png'];
+                if (!validExtensions.includes(file.type)) {
+                    alert('Invalid File Type. Please upload a .jpg, .jpeg, or .png file.');
+                    this.value = ''; // Reset file input
+                }
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('uploadForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert("PROFILE PHOTO UPDATED SUCCESSFULLY");
+            location.reload(); // Reload the page after the alert
+        });
+
+        // Go back to the ManageProfile.html page
+        function goBack() {
+            window.location.href = 'ManageProfile.html';
+        }
+    </script>
+</body>
+</html>

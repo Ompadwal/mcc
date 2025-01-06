@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Name</title>
+    <style>
+{
+            Margin: 0;
+            Padding: 0;
+            Box-sizing: border-box;
+        }
+
+        Body {
+            Font-family: Arial, sans-serif;
+            Display: flex;
+            Height: 100vh;
+            Background: linear-gradient(135deg, #74ebd5, #9face6);
+        }
+
+        .sidebar {
+            Width: 25%;
+            Background: #2d2d2d;
+            Color: #fff;
+            Display: flex;
+            Flex-direction: column;
+            Align-items: center;
+            Padding: 20px;
+            Position: relative;
+        }
+
+        .sidebar h2 {
+            Margin-bottom: 20px;
+            Font-size: 20px;
+            Text-transform: uppercase;
+            Border-bottom: 2px solid #555;
+            Padding-bottom: 10px;
+            Width: 100%;
+            Text-align: center;
+        }
+
+        .profile-photo {
+            Width: 120px;
+            Height: 120px;
+            Border-radius: 50%;
+            Background: url('images/profile.jpg') no-repeat center center/cover;
+            Margin-bottom: 20px;
+            Border: 4px solid #555;
+        }
+
+        .menu {
+            Width: 100%;
+        }
+
+        .menu button {
+            Width: 100%;
+            Background: #444;
+            Color: #fff;
+            Border: none;
+            Padding: 15px;
+            Font-size: 16px;
+            Margin: 5px 0;
+            Cursor: pointer;
+            Text-align: left;
+            Transition: all 0.3s ease;
+            Border-radius: 5px;
+        }
+
+        .menu button:hover {
+            Background: #555;
+        }
+
+        .main-content {
+            Flex: 1;
+            Background: #f9f9f9;
+            Display: flex;
+            Flex-direction: column;
+            Justify-content: flex-start;
+            Align-items: center;
+            Padding: 0px;
+        }
+
+        .top-bar {
+            Width: 96%;
+            Background: #444;
+            Color: #fff;
+            Padding: 25px;
+            Text-align: center;
+            Border-radius: 5px;
+            Margin-bottom: 20px;
+        }
+
+        .form-container {
+            Background: #fff;
+            Padding: 20px;
+            Border-radius: 5px;
+            Box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            Width: 400px;
+            Text-align: center;
+        }
+
+        .form-container input {
+            Width: 90%;
+            Padding: 10px;
+            Margin: 10px 0;
+            Border: 1px solid #ccc;
+            Border-radius: 5px;
+            Font-size: 16px;
+        }
+
+        .form-container button {
+            Padding: 10px 20px;
+            Margin: 10px 5px;
+            Font-size: 16px;
+            Border: none;
+            Border-radius: 5px;
+            Cursor: pointer;
+            Transition: all 0.3s ease;
+        }
+
+        .form-container .submit-btn {
+            Background: #28a745;
+            Color: #fff;
+        }
+
+        .form-container .submit-btn:hover {
+            Background: #218838;
+        }
+
+        .form-container .back-btn {
+            Background: #dc3545;
+            Color: #fff;
+        }
+
+        .form-container .back-btn:hover {
+            Background: #c82333;
+        }
+
+        .error-message {
+            Color: red;
+            Font-size: 14px;
+            Display: none;
+            Margin-top: -8px;
+            Margin-bottom: 10px;
+            Text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            Body {
+                Flex-direction: column;
+            }
+
+            .sidebar {
+                Width: 100%;
+                Height: auto;
+            }
+
+            .main-content {
+                Width: 100%;
+            }
+        }
+    </style>
+    <script>
+        const defaultUsername = "admin";
+
+        function validateName(name) {
+            const namePattern = /^[A-Za-z][A-Za-z0-9_'-]{4,14}$/;
+            return namePattern.test(name) && !name.includes(" ");
+        }
+
+        function confirmUpdate() {
+            const oldName = document.getElementById("oldName").value.trim();
+            const newName = document.getElementById("newName").value.trim();
+
+            const oldNameError = document.getElementById("oldNameError");
+            const newNameError = document.getElementById("newNameError");
+
+            // Reset error messages
+            oldNameError.style.display = "none";
+            newNameError.style.display = "none";
+
+            let isValid = true;
+
+            // Validate old name
+            if (!oldName) {
+                oldNameError.textContent = "This field is required.";
+                oldNameError.style.display = "block";
+                isValid = false;
+            } else if (oldName !== defaultUsername) {
+                oldNameError.textContent = "Invalid old username.";
+                oldNameError.style.display = "block";
+                isValid = false;
+            }
+
+            // Validate new name
+            if (!newName) {
+                newNameError.textContent = "This field is required.";
+                newNameError.style.display = "block";
+                isValid = false;
+            } else if (oldName === newName) {
+                newNameError.textContent = "Old name and new name cannot be the same.";
+                newNameError.style.display = "block";
+                isValid = false;
+            } else if (!validateName(newName)) {
+                newNameError.textContent = "New name must be between 4 to 15 characters.";
+                newNameError.style.display = "block";
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("NAME UPDATED SUCCESSFULLY");
+                location.reload(); // Reloads the page
+            }
+        }
+
+        function goBack() {
+            location.href = 'ManageProfile.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <div class="profile-photo"></div>
+        <div class="menu">
+            <button onclick="location.href='ManageProfile.html'">Manage Profile</button>
+            <button onclick="location.href='ManageDocuments.html'">Manage Documents</button>
+            <button onclick="location.href='ManageCommittees.html'">Manage Committees</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            UPDATE NAME
+        </div>
+        <div class="form-container">
+            <input type="text" placeholder="Enter Your Old Name" id="oldName" />
+            <span class="error-message" id="oldNameError"></span>
+            
+            <input type="text" placeholder="Enter Your New Name" id="newName" />
+            <span class="error-message" id="newNameError"></span>
+
+            <div>
+                <button class="submit-btn" onclick="confirmUpdate()">SUBMIT</button>
+                <button class="back-btn" onclick="goBack()">GO BACK</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
